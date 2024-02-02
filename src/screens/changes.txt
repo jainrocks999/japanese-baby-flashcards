@@ -1,0 +1,9 @@
+image:
+ {"ActualSound": "", "Category": "Animal", "Image": "Nest.jpg", "LenguageText": "巣", "Sound": "nest.mp3", "Title": "Nest", "_id": 121}
+ {"ActualSound": "act-bird.mp3", "Category": "Animal", "Image": "Bird.jpg", "LenguageText": "とり", "Sound": "bird.mp3", "Title": "Bird", "_id": 86}
+ {"ActualSound": "", "Category": "BodyParts", "Image": "Arm.jpg", "LenguageText": "腕", "Sound": "arm.mp3", "Title": "Arm", "_id": 275}
+  {"ActualSound": "", "Category": "BodyParts", "Image": "bellyButton.jpg", "LenguageText": "ヘソ", "Sound": "belly button.mp3", "Title": "Belly Button", "_id": 277}
+
+
+ sound:
+ {"ActualSound": "act_log", "Category": "OutdoorItems", "Image": "log.jpg", "LenguageText": "ログ", "Sound": "log.mp3", "Title": "Log", "_id": 390}
