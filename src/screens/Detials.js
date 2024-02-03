@@ -281,7 +281,7 @@ const Detials = props => {
             {Images && (
               <Image
                 style={{
-                  height: height / 1.45,
+                  height: height / 1.53,
                   width: '100%',
                   alignItems: 'center',
                 }}
@@ -385,12 +385,12 @@ const styles = StyleSheet.create({
   },
   imgContainer: {
     height: height,
-    marginTop: '5%',
+    marginTop: '1%',
     // marginLeft: 8,
   },
   btnContainer: {
     position: 'absolute',
-    bottom: '4%',
+    bottom: '2%',
     width: '98%',
     justifyContent: 'space-between',
     marginHorizontal: wp(1.5),

@@ -1,4 +1,11 @@
-import {View, Text, Image, Dimensions, StatusBar} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  StatusBar,
+  SafeAreaView,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {useNavigation, StackActions} from '@react-navigation/native';
 
@@ -12,14 +19,16 @@ const SplashScreen = () => {
     }, 2000);
   });
   return (
-    <View style={{height: height, width: width, marginHorizontal: 1}}>
-      <StatusBar backgroundColor="#abdbe3" />
-      <Image
-        style={{height: '100%', width: '100%'}}
-        resizeMode="stretch"
-        source={require('../../Assets4/splash.png')}
-      />
-    </View>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#abdbe3'}}>
+      <View style={{height: height, width: width, marginHorizontal: 1}}>
+        <StatusBar backgroundColor="#abdbe3" />
+        <Image
+          style={{height: '100%', width: '100%'}}
+          resizeMode="stretch"
+          source={require('../../Assets4/splash.png')}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
