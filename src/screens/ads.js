@@ -7,8 +7,8 @@ export const Addsid = {
       Interstitial: 'ca-app-pub-3339897183017333/7476951587',
     },
     ios: {
-      BANNER: TestIds.BANNER,
-      Interstitial: TestIds.INTERSTITIAL,
+      BANNER: 'ca-app-pub-3339897183017333/7616552387',
+      Interstitial: 'ca-app-pub-3339897183017333/6814299131',
     },
   }),
 };

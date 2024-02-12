@@ -87,6 +87,7 @@ const NextScreen = ({route}) => {
       <StatusBar backgroundColor="#73cbea" />
       <ImageBackground
         style={{flex: 1}}
+        resizeMode="stretch"
         source={require('../../Assets4/setting_screen.png')}>
         <Header onPress2={() => setMut(!mute)} mute={mute} />
         <View
