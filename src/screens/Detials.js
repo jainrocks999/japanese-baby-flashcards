@@ -10,7 +10,7 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {height, width} from '../components/Diemenstions';
 import TrackPlayer from 'react-native-track-player';
@@ -33,6 +33,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import {Addsid} from './ads';
 import RNFS from 'react-native-fs';
+import {IAPContext} from '../Context';
 
 const adUnit = Addsid.Interstitial;
 const requestOption = {
@@ -44,6 +45,7 @@ const path = Platform.select({
   ios: RNFS.MainBundlePath + '/files/',
 });
 const Detials = props => {
+  const {hasPurchased} = useContext(IAPContext);
   const tablet = isTablet();
   const disapatch = useDispatch();
   const backSound = useSelector(state => state.backsound);
@@ -164,7 +166,7 @@ const Detials = props => {
     } else if (count < 0) {
       navigation.goBack();
     } else {
-      getAdd();
+      !hasPurchased ? getAdd() : null;
       navigation.dispatch(StackActions.replace('next'));
     }
     setImages(Imagess);
@@ -281,7 +283,7 @@ const Detials = props => {
             {Images && (
               <Image
                 style={{
-                  height: height / 1.53,
+                  height: hasPurchased ? height / 1.2 : height / 1.6,
                   width: '100%',
                   alignItems: 'center',
                 }}
@@ -294,6 +296,7 @@ const Detials = props => {
             style={[
               styles.btnContainer,
               setting.Swipe != 1 ? {flexDirection: 'row'} : null,
+              {bottom: hasPurchased ? '3%' : '3%'},
             ]}>
             {setting.Swipe == 0 && (
               <TouchableOpacity
@@ -348,15 +351,17 @@ const Detials = props => {
             )}
           </View>
         </View>
-        <View style={{bottom: 0, width: '100%', alignItems: 'center'}}>
-          <BannerAd
-            unitId={Addsid.BANNER}
-            sizes={[BannerAdSize.ANCHORED_ADAPTIVE_BANNER]}
-            requestOptions={{
-              requestNonPersonalizedAdsOnly: true,
-            }}
-          />
-        </View>
+        {!hasPurchased ? (
+          <View style={{bottom: 0, width: '100%', alignItems: 'center'}}>
+            <BannerAd
+              unitId={Addsid.BANNER}
+              sizes={[BannerAdSize.ANCHORED_ADAPTIVE_BANNER]}
+              requestOptions={{
+                requestNonPersonalizedAdsOnly: true,
+              }}
+            />
+          </View>
+        ) : null}
       </GestureRecognizer>
     </SafeAreaView>
   );
