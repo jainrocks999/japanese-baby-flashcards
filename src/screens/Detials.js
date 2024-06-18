@@ -251,12 +251,12 @@ const Detials = props => {
                   Title.english == '' ? {fontSize: wp(7)} : null,
                 ]}>
                 {console.log(Title)}
-                {setting.English ? Title.japanese : ''}
+                {setting.English == 1 ? Title.japanese : ''}
               </Text>
               {Title.english != '' ? (
                 <Text
                   style={[styles.Titel, {fontSize: wp(4), fontWeight: '500'}]}>
-                  {setting.English ? Title.english : ''}
+                  {setting.English == 1 ? Title.english : ''}
                 </Text>
               ) : null}
             </View>
