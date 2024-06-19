@@ -304,6 +304,7 @@ const SettingScreen = props => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               marginHorizontal: '10%',
+              marginTop: hasPurchased ? '8%' : 0,
             }}>
             <TouchableOpacity
               onPress={async () => {

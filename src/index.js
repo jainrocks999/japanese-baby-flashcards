@@ -12,6 +12,7 @@ import MyStack from './components/MyStack';
 import {AdEventType, InterstitialAd} from 'react-native-google-mobile-ads';
 import {Addsid} from './screens/ads';
 import {IAPContext} from './Context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Root = () => {
   LogBox.ignoreAllLogs();
@@ -43,12 +44,13 @@ const Root = () => {
   }, []);
   useEffect(() => {}, [appStateVisible]);
 
-  function handleBackButtonClick() {
-    console.log('tjhisisisi', hasPurchased);
-    if (!hasPurchased) {
-      showAdd1();
-    } else {
+ async function handleBackButtonClick () {
+  const purchase= await AsyncStorage.getItem("IN_APP_PURCHASE")
+    if (purchase) {
       BackHandler.exitApp();
+    } else {
+      showAdd1();
+     
     }
 
     return true;
