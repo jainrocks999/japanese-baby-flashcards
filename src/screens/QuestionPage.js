@@ -1,25 +1,21 @@
 import {
   View,
-  Text,
   Image,
   TouchableOpacity,
   BackHandler,
-  Alert,
   Platform,
   SafeAreaView,
   StatusBar,
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
-import {height, width} from '../components/Diemenstions';
+import {FlatList} from 'react-native-gesture-handler';
+import {height} from '../components/Diemenstions';
 import {StyleSheet} from 'react-native';
 import {setupPlayer} from '../components/Setup';
 import TrackPlayer from 'react-native-track-player';
 import {RightVOid, WrongVoid} from '../components/WrongVoid';
 import {StackActions, useNavigation} from '@react-navigation/native';
-import {useIsFocused} from '@react-navigation/native';
-import {addPagable} from '../reduxToolkit/Slicer6';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -28,7 +24,6 @@ import {isTablet} from 'react-native-device-info';
 import {
   InterstitialAd,
   AdEventType,
-  GAMBannerAd,
   BannerAdSize,
   BannerAd,
 } from 'react-native-google-mobile-ads';
@@ -85,7 +80,6 @@ const QuestionPage = props => {
   };
 
   const IsPlay = async (item, index) => {
-    //  console.log('isPlay is fired')
     let isReady = await setupPlayer();
     await TrackPlayer.reset();
     setCount(count + 1);
@@ -245,7 +239,11 @@ const QuestionPage = props => {
           </View>
           <View
             style={{
-              marginTop: tablet ? '5%' : hasPurchased ? '8%' : '2%',
+              marginTop: tablet
+                ? '5%'
+                : Platform.OS == 'android'
+                ? '5%'
+                : '-1%',
               alignSelf: 'center',
               alignItems: 'center',
               paddingLeft: '2%',
