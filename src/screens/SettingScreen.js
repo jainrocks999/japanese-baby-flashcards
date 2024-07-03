@@ -44,9 +44,16 @@ import {Addsid} from './ads';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IAPContext} from '../Context';
 import PurcahsdeModal from '../components/requestPurchase';
+const authId = Addsid.Interstitial;
+const requestOption = {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['fashion', 'clothing'],
+};
 const SettingScreen = props => {
   const {hasPurchased, requestPurchase, checkPurchases, visible, setVisible} =
     useContext(IAPContext);
+  const interstitial = InterstitialAd.createForAdRequest(authId, requestOption);
+
   const pr = props.route.params.pr;
   const muted = useSelector(state => state.sound);
   const canlable = useSelector(state => state.cancle);
@@ -65,6 +72,16 @@ const SettingScreen = props => {
     Videos: setting.Videos,
     Voice: setting.Voice,
   });
+  const showAdd = () => {
+    const unsubscribe = interstitial.addAdEventListener(
+      AdEventType.LOADED,
+      () => {
+        interstitial.show();
+      },
+    );
+    interstitial.load();
+    return unsubscribe;
+  };
   const [questionMode, setquestion] = useState(quesion);
   const handleSwitch = (name, value) => {
     if (questionMode == 1) {
@@ -80,6 +97,7 @@ const SettingScreen = props => {
     if (pr === 'question') {
       if (questionMode == 0) {
         Navigation.dispatch(StackActions.replace('details'));
+        !hasPurchased && showAdd();
         dispatch({
           type: 'backSoundFromquestions/playWhenThePage',
           fromDetails: false,
@@ -97,6 +115,7 @@ const SettingScreen = props => {
     } else if (pr === 'details') {
       if (questionMode == 1) {
         Navigation.dispatch(StackActions.replace('question'));
+        !hasPurchased && showAdd();
         dispatch({
           type: 'backSoundFromquestions/playWhenThePage',
           fromDetails: false,
